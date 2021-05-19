@@ -1,0 +1,203 @@
+{
+  "name": "shadered",
+  "displayName": "SHADERed",
+  "version": "0.0.1",
+  "publisher": "dfranx",
+  "description": "Starter extension for developing debug adapters for VS Code.",
+  "author": {
+    "name": "dfranx",
+    "email": "dfranx@shadered.org"
+  },
+  "license": "MIT",
+  "keywords": [
+    "multi-root ready"
+  ],
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "icon": "images/mock-debug-icon.png",
+  "categories": [
+    "Debuggers"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-mock-debug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-mock-debug/issues"
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package-ext && yarn run package-web",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/extension.webpack.config.js",
+    "watch2": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "package-ext": "webpack --mode production --config ./build/extension.webpack.config.js",
+    "compile-web": "webpack --devtool nosources-source-map --config ./build/web-extension.webpack.config.js",
+    "watch-web": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/web-extension.webpack.config.js",
+    "package-web": "webpack --mode production --config ./build/web-extension.webpack.config.js"
+  },
+  "dependencies": {
+    "await-notify": "1.0.1",
+    "vscode-debugadapter": "^1.46.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.55.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^14.14.37",
+    "eslint": "^7.23.0",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.3.2",
+    "typescript": "^4.2.3",
+    "vscode-debugadapter-testsupport": "^1.46.0",
+    "vsce": "^1.87.1",
+    "ts-loader": "^8.1.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "main": "./dist/ext/extension.js",
+  "browser": "./dist/web/extension.js",
+  "activationEvents": [
+    "onDebugResolve:shadered",
+    "onDebugDynamicConfigurations:shadered",
+    "onCommand:extension.shadered.getProgramName",
+    "onCommand:extension.shadered.runEditorContents",
+    "onCommand:extension.shadered.debugEditorContents"
+  ],
+  "workspaceTrust": {
+    "request": "never"
+  },
+  "contributes": {
+    "menus": {
+      "editor/title/run": [
+        {
+          "command": "extension.shadered.runEditorContents",
+          "when": "resourceExtname == .sprj"
+        },
+        {
+          "command": "extension.shadered.debugEditorContents",
+          "when": "resourceExtname == .sprj"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "extension.shadered.debugEditorContents",
+          "when": "resourceExtname == .sprj"
+        },
+        {
+          "command": "extension.shadered.runEditorContents",
+          "when": "resourceExtname == .sprj"
+        }
+      ],
+      "debug/variables/context": [
+        {
+          "command": "extension.shadered.toggleFormatting",
+          "when": "debugType == 'shadered' && debugProtocolVariableMenuContext == 'simple'"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "extension.shadered.debugEditorContents",
+        "title": "Debug File",
+        "category": "SHADERed Debug",
+        "enablement": "!inDebugMode",
+        "icon": "$(debug-alt)"
+      },
+      {
+        "command": "extension.shadered.runEditorContents",
+        "title": "Run File",
+        "category": "SHADERed Debug",
+        "enablement": "!inDebugMode",
+        "icon": "$(play)"
+      },
+      {
+        "command": "extension.shadered.toggleFormatting",
+        "title": "Toggle between decimal and hex formatting"
+      }
+    ],
+    "breakpoints": [
+      {
+        "language": "glsl"
+      },
+      {
+        "language": "hlsl"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "shadered",
+        "label": "SHADERed Debug",
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Absolute path to a .sprj file",
+                "default": "${workspaceFolder}/${command:AskForProgramName}"
+              },
+              "stopOnEntry": {
+                "type": "boolean",
+                "description": "Automatically stop after launch.",
+                "default": true
+              },
+              "trace": {
+                "type": "boolean",
+                "description": "Enable logging of the Debug Adapter Protocol.",
+                "default": true
+              }
+            }
+          }
+        },
+        "initialConfigurations": [
+          {
+            "type": "shadered",
+            "request": "launch",
+            "name": "Ask for file name",
+            "program": "${workspaceFolder}/${command:AskForProgramName}",
+            "stopOnEntry": true
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "SHADERed Debug: Launch",
+            "description": "A new configuration for 'debugging' a user selected shader file.",
+            "body": {
+              "type": "shadered",
+              "request": "launch",
+              "name": "Ask for file name",
+              "program": "^\"\\${workspaceFolder}/\\${command:AskForProgramName}\"",
+              "stopOnEntry": true
+            }
+          }
+        ],
+        "variables": {
+          "AskForProgramName": "extension.shadered.getProgramName"
+        }
+      }
+    ],
+    "configuration": [
+      {
+        "title": "SHADERed",
+        "properties": {
+          "shadered.executablePath": {
+            "type": "string",
+            "default": "",
+            "description": "Specifies the path to your SHADERed.exe"
+          }
+        }
+      }
+    ]
+  }
+}

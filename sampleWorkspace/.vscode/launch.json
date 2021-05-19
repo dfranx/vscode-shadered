@@ -1,0 +1,13 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "shadered",
+			"request": "launch",
+			"name": "Debug project.sprj",
+			"program": "${workspaceFolder}/project.sprj"
+		}
+	]
+}
+
+
