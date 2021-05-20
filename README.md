@@ -1,21 +1,10 @@
-# vscode-shadered
-This extension lets you debug and preview HLSL & GLSL shaders in Visual Studio Code.
+This extension lets you debug and preview HLSL & GLSL shaders in Visual Studio Code. It requires at least **[SHADERed v1.5.3](https://shadered.org)**.
+You can watch a YouTube video on how to get started with this extension: [https://www.youtube.com/watch?v=3VGN8r88Pkk](https://www.youtube.com/watch?v=3VGN8r88Pkk)
 
-## How to use
-After you install the extension, you need to tell VS Code the location of your SHADERed executable (you have to have [SHADERed downloaded](https://shadered.org) for this extension to work!).
-You can do this by going to the settings (`File` &rarr; `Preferences` &rarr; `Settings`) and searching for "shadered".
-A textbox will appear where you have to enter the path to your SHADERed executable.
-
-![Visual Studio Code SHADERed settings](https://shadered.org/assets/blog/9/img/vscode_settings.png)
-
-Now that VS Code knows the location of SHADERed, open a directory/workspace which contains a SHADERed project file (`.sprj`).
-To start the debugger, either open the `.sprj` file in the text editor or
-add the `.vscode/launch.json` file to your workspace with the following [code](https://github.com/dfranx/vscode-shadered/blob/master/sampleWorkspace/.vscode/launch.json):
-
-![VS Code project launch.json](https://shadered.org/assets/blog/9/img/launch_json.png)
-
-and then press the F5 key.
-Without the `launch.json` file, you will always have to change focus to the `.sprj` file in VS Code before you press the F5 key.
+#### Table of Contents
+* [Features](#features)
+* [How to setup](##how-to-setup)
+* [Build](#build)
 
 ## Features
 ### Debugging HLSL & GLSL shaders
@@ -32,7 +21,7 @@ To start the actual debugger, click on the "play" button. You will now be able t
 * add watches
 * etc... 
 
-![Debugging a shader in VS Code](https://shadered.org/assets/blog/9/img/debugging.gif)
+![Debugging a shader in VS Code](https://shadered.org/assets/blog/9/img/debugging_light.gif)
 
 Besides debugging, you can also see your shader's output as you edit the code.
 When you save your changes to a file, SHADERed will automatically detect them and recompile the shaders.
@@ -74,6 +63,22 @@ Besides vertex and pixel shaders, you can also debug geometry shaders. A window 
 Debugging compute shaders with this extension is somewhat limited. There's currently no way to start debugging a specific thread (though, this can be done through standalone SHADERed). You can only initiate the CS debugger through the so-called "suggestions" (these suggestions are predictions made by SHADERed):
 
 ![Debugging compute shader in VS Code](https://shadered.org/assets/blog/9/img/debugCS.png)
+
+## How to setup
+After you install the extension, you need to tell VS Code the location of your SHADERed executable (you have to have [SHADERed downloaded](https://shadered.org) for this extension to work!).
+You can do this by going to the settings (`File` &rarr; `Preferences` &rarr; `Settings`) and searching for "shadered".
+A textbox will appear where you have to enter the path to your SHADERed executable.
+
+![Visual Studio Code SHADERed settings](https://shadered.org/assets/blog/9/img/vscode_settings.png)
+
+Now that VS Code knows the location of SHADERed, open a directory/workspace which contains a SHADERed project file (`.sprj`).
+To start the debugger, either open the `.sprj` file in the text editor or
+add the `.vscode/launch.json` file to your workspace with the following [code](https://github.com/dfranx/vscode-shadered/blob/master/sampleWorkspace/.vscode/launch.json):
+
+![VS Code project launch.json](https://shadered.org/assets/blog/9/img/launch_json.png)
+
+and then press the F5 key.
+Without the `launch.json` file, you will always have to change focus to the `.sprj` file in VS Code before you press the F5 key.
 
 ## Build
 If you want to compile this extension by yourself, run these commands:
