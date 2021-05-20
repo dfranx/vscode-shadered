@@ -1,7 +1,7 @@
 {
   "name": "shadered",
   "displayName": "SHADERed",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "dfranx",
   "description": "Starter extension for developing debug adapters for VS Code.",
   "author": {
@@ -22,10 +22,10 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/vscode-mock-debug.git"
+    "url": "https://github.com/dfranx/vscode-shadered.git"
   },
   "bugs": {
-    "url": "https://github.com/Microsoft/vscode-mock-debug/issues"
+    "url": "https://github.com/dfranx/vscode-shadered/issues"
   },
   "scripts": {
     "vscode:prepublish": "yarn run package-ext",
@@ -132,7 +132,7 @@
     "debuggers": [
       {
         "type": "shadered",
-        "label": "SHADERed Debug",
+        "label": "SHADERed",
         "configurationAttributes": {
           "launch": {
             "required": [
@@ -191,7 +191,7 @@
           "shadered.executablePath": {
             "type": "string",
             "default": "",
-            "description": "Specifies the path to your SHADERed.exe"
+            "description": "Specifies the path to your SHADERed executable"
           }
         }
       }
