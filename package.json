@@ -1,7 +1,7 @@
 {
   "name": "shadered",
   "displayName": "SHADERed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "dfranx",
   "description": "Starter extension for developing debug adapters for VS Code.",
   "author": {
