@@ -1,9 +1,9 @@
 {
   "name": "shadered",
   "displayName": "SHADERed",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "dfranx",
-  "description": "Starter extension for developing debug adapters for VS Code.",
+  "description": "Extension for debugging (and prototyping) GLSL & HLSL shaders",
   "author": {
     "name": "dfranx",
     "email": "dfranx@shadered.org"
@@ -20,6 +20,7 @@
     "Debuggers"
   ],
   "private": true,
+  "homepage": "https://shadered.org",
   "repository": {
     "type": "git",
     "url": "https://github.com/dfranx/vscode-shadered.git"
