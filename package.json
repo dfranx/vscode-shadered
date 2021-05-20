@@ -15,7 +15,7 @@
   "engines": {
     "vscode": "^1.55.0"
   },
-  "icon": "images/mock-debug-icon.png",
+  "icon": "images/logo.png",
   "categories": [
     "Debuggers"
   ],
@@ -28,7 +28,7 @@
     "url": "https://github.com/Microsoft/vscode-mock-debug/issues"
   },
   "scripts": {
-    "vscode:prepublish": "yarn run package-ext && yarn run package-web",
+    "vscode:prepublish": "yarn run package-ext",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext ts",
     "watch": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/extension.webpack.config.js",
@@ -37,10 +37,7 @@
     "test": "node ./out/test/runTest.js",
     "package": "vsce package",
     "publish": "vsce publish",
-    "package-ext": "webpack --mode production --config ./build/extension.webpack.config.js",
-    "compile-web": "webpack --devtool nosources-source-map --config ./build/web-extension.webpack.config.js",
-    "watch-web": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/web-extension.webpack.config.js",
-    "package-web": "webpack --mode production --config ./build/web-extension.webpack.config.js"
+    "package-ext": "webpack --mode production --config ./build/extension.webpack.config.js"
   },
   "dependencies": {
     "await-notify": "1.0.1",
